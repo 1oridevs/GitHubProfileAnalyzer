@@ -1,14 +1,18 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
 const githubRoutes = require('./routes/github');
 
-const app = express();
+dotenv.config();
 
-// Middleware
-app.use(cors()); // Allow all origins
+const app = express();
+const PORT = 5001;
+
+app.use(cors());
 app.use(express.json());
+
 // Routes
 app.use('/api/github', githubRoutes);
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start server
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
